@@ -2,8 +2,8 @@
 
 A personal expense tracker with automatic receipt scanning. Add expenses manually or by uploading a photo of a receipt — merchant, date, and total are extracted automatically. View all expenses with a live category breakdown, and get a daily spending summary by email.
 
-**Live app:** [add your Vercel link here]
-**Backend API:** [add your Render link here]
+**Live app:** https://quickexpense-eh2ckyuff-sanjana-projects1.vercel.app
+**Backend API:** https://quickexpense-api.onrender.com
 
 ## Features
 
@@ -11,6 +11,40 @@ A personal expense tracker with automatic receipt scanning. Add expenses manuall
 - Live-updating expense list and category breakdown — no page reload needed
 - Daily email summary of total spend and top category
 - Manual and receipt-based entries are stored with identical structure
+
+## Architecture
+
+```mermaid
+flowchart LR
+    subgraph Client["Browser"]
+        UI["React App (Vercel)"]
+    end
+
+    subgraph Server["Backend (Render)"]
+        API["Express API"]
+        OCR["Tesseract.js OCR"]
+        CRON["node-cron: daily job"]
+    end
+
+    DB[("PostgreSQL (Supabase)")]
+    EMAIL["Resend (email)"]
+    EXT["cron-job.org (external scheduler)"]
+
+    UI -- "GET/POST /api/expenses" --> API
+    UI -- "POST /api/expenses/receipt (image)" --> API
+    API -- "read/write" --> DB
+    API -- "image buffer" --> OCR
+    OCR -- "merchant, date, amount" --> API
+    CRON -- "runs daily, or via" --> API
+    EXT -- "POST /api/trigger-summary" --> API
+    API -- "send summary" --> EMAIL
+    EMAIL -- "daily summary email" --> User(("User"))
+```
+
+**Flow summary:**
+- **Manual entry:** UI form → `POST /api/expenses` → saved to Postgres → returned and rendered immediately (no reload).
+- **Receipt upload:** UI uploads image → `POST /api/expenses/receipt` → Tesseract OCR extracts merchant/date/amount → saved with `source: 'receipt'` → same shape as a manual entry, so the UI treats both identically.
+- **Daily summary:** either the in-process `node-cron` job or an external ping from cron-job.org hits `/api/trigger-summary`, which queries the day's expenses, computes total spend and top category, and sends the email via Resend.
 
 ## Tech stack
 
@@ -47,8 +81,8 @@ quickexpense/
 ### 1. Clone the repo
 
 ```bash
-git clone https://github.com/sanjan2002/quickexpense.git
-cd quickexpense
+git clone https://github.com/sanjan2002/quickexpense-.git
+cd quickexpense-
 ```
 
 ### 2. Backend setup
@@ -130,3 +164,4 @@ The backend schedules a daily job (`node-cron`) that emails a summary of that da
 - Single-user app — no authentication, `EMAIL_TO` is a fixed address rather than tied to a user account.
 - Receipt category is defaulted to "Food & Dining" rather than inferred from item contents.
 - OCR accuracy depends on receipt image quality and font; parsing was tuned against the provided sample receipt.
+- Backend is hosted on Render's free tier, which spins down after ~15 minutes of inactivity — the first request after a period of idle time may take 30–60 seconds to respond while the service wakes up.
