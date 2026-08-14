@@ -1,0 +1,60 @@
+:root {
+  --paper: #F2F1EA;
+  --paper-raised: #FBFAF6;
+  --ink: #1D2B22;
+  --ink-soft: #55604F;
+  --ink-faint: #8B9384;
+  --rule: #DAD6C7;
+  --rule-strong: #C7C2AE;
+
+  --green: #2F6B4C;
+  --green-ink: #1E4A33;
+  --amber: #B8862D;
+  --amber-ink: #7A5A1D;
+  --plum: #7C6FA6;
+  --plum-ink: #544A78;
+  --slate: #5B7BA6;
+  --slate-ink: #3D5878;
+  --rust: #A6432B;
+  --rust-bg: #F5E4DE;
+
+  --font-display: 'Fraunces', serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
+
+  color-scheme: light;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+#root {
+  min-height: 100svh;
+}
+
+button {
+  font-family: inherit;
+}
+
+input, select {
+  font-family: inherit;
+}
+
+:focus-visible {
+  outline: 2px solid var(--green);
+  outline-offset: 2px;
+}

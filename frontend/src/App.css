@@ -1,0 +1,367 @@
+.app {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 48px 24px 80px;
+}
+
+/* ---------- masthead ---------- */
+
+.masthead {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  border-bottom: 2px solid var(--ink);
+  padding-bottom: 20px;
+  margin-bottom: 32px;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.masthead-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin: 0 0 4px;
+}
+
+.masthead h1 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 34px;
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+.masthead-today {
+  text-align: right;
+}
+
+.masthead-today-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin: 0 0 2px;
+}
+
+.masthead-today-value {
+  font-family: var(--font-mono);
+  font-size: 28px;
+  font-weight: 500;
+  color: var(--green-ink);
+}
+
+/* ---------- error banner ---------- */
+
+.banner-error {
+  font-family: var(--font-body);
+  font-size: 13.5px;
+  background: var(--rust-bg);
+  color: var(--rust);
+  border-left: 3px solid var(--rust);
+  padding: 10px 14px;
+  margin-bottom: 24px;
+  border-radius: 0 4px 4px 0;
+}
+
+/* ---------- layout ---------- */
+
+.layout {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 28px;
+  align-items: start;
+}
+
+@media (max-width: 760px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+.card {
+  background: var(--paper-raised);
+  border: 1px solid var(--rule);
+  border-radius: 10px;
+  padding: 22px;
+}
+
+.card h2 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 17px;
+  margin: 0 0 16px;
+}
+
+/* ---------- tabs ---------- */
+
+.tabs {
+  display: flex;
+  border: 1px solid var(--rule-strong);
+  border-radius: 7px;
+  padding: 3px;
+  margin-bottom: 18px;
+  background: var(--paper);
+}
+
+.tab {
+  flex: 1;
+  border: none;
+  background: transparent;
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 500;
+  padding: 8px 10px;
+  border-radius: 5px;
+  color: var(--ink-soft);
+  cursor: pointer;
+}
+
+.tab.active {
+  background: var(--ink);
+  color: var(--paper-raised);
+}
+
+/* ---------- forms ---------- */
+
+.field {
+  margin-bottom: 12px;
+}
+
+.field label {
+  display: block;
+  font-size: 12px;
+  color: var(--ink-soft);
+  margin-bottom: 5px;
+  font-weight: 500;
+}
+
+.field input,
+.field select {
+  width: 100%;
+  padding: 9px 10px;
+  border: 1px solid var(--rule-strong);
+  border-radius: 6px;
+  background: #fff;
+  color: var(--ink);
+  font-size: 14px;
+}
+
+.field input:focus,
+.field select:focus {
+  border-color: var(--green);
+}
+
+.field-row {
+  display: flex;
+  gap: 10px;
+}
+
+.field-row .field {
+  flex: 1;
+}
+
+.btn {
+  width: 100%;
+  border: none;
+  border-radius: 6px;
+  padding: 11px 14px;
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  background: var(--green);
+  color: #fff;
+  margin-top: 4px;
+}
+
+.btn:hover {
+  background: var(--green-ink);
+}
+
+.btn:disabled {
+  background: var(--ink-faint);
+  cursor: default;
+}
+
+/* ---------- receipt upload panel (signature: perforated edge) ---------- */
+
+.receipt-panel {
+  position: relative;
+  padding-top: 32px;
+}
+
+.receipt-panel::before {
+  content: '';
+  position: absolute;
+  top: 12px;
+  left: 0;
+  right: 0;
+  height: 0;
+  border-top: 2px dashed var(--rule-strong);
+}
+
+.receipt-panel::after {
+  content: '';
+  position: absolute;
+  top: 5px;
+  left: 0;
+  right: 0;
+  height: 14px;
+  background-image: radial-gradient(circle, var(--paper) 5px, transparent 5.5px);
+  background-size: 18px 14px;
+  background-repeat: repeat-x;
+  background-position: center;
+}
+
+.dropzone {
+  border: 1.5px dashed var(--rule-strong);
+  border-radius: 8px;
+  padding: 22px 14px;
+  text-align: center;
+  margin-bottom: 12px;
+  background: var(--paper);
+}
+
+.dropzone input[type='file'] {
+  font-size: 12.5px;
+  width: 100%;
+}
+
+.dropzone-hint {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--ink-faint);
+  margin: 8px 0 0;
+}
+
+/* ---------- chart card ---------- */
+
+.chart-card {
+  position: relative;
+}
+
+.chart-wrap {
+  position: relative;
+}
+
+.chart-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  pointer-events: none;
+}
+
+.chart-center-value {
+  font-family: var(--font-mono);
+  font-size: 22px;
+  font-weight: 500;
+  color: var(--ink);
+  display: block;
+}
+
+.chart-center-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+.chart-empty {
+  text-align: center;
+  color: var(--ink-faint);
+  font-size: 13.5px;
+  padding: 40px 0;
+}
+
+/* ---------- ledger table ---------- */
+
+.ledger {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.ledger thead th {
+  text-align: left;
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  font-weight: 500;
+  padding: 0 16px 8px 4px;
+  border-bottom: 1px solid var(--rule-strong);
+}
+
+.ledger th.num,
+.ledger td.num {
+  text-align: right;
+}
+
+.ledger tbody tr {
+  border-bottom: 1px solid var(--rule);
+}
+
+.ledger tbody tr:last-child {
+  border-bottom: none;
+}
+
+.ledger td {
+  padding: 11px 16px 11px 4px;
+  font-size: 13.5px;
+  vertical-align: middle;
+}
+
+.ledger td.merchant {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.cat-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.ledger td.num {
+  font-family: var(--font-mono);
+  font-weight: 500;
+}
+
+.ledger td.date,
+.ledger td.category {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--ink-soft);
+}
+
+.source-badge {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 2px 7px;
+  border-radius: 10px;
+  border: 1px solid var(--rule-strong);
+  color: var(--ink-soft);
+}
+
+.source-badge.receipt {
+  border-color: var(--green);
+  color: var(--green-ink);
+}
+
+.ledger-empty {
+  text-align: center;
+  padding: 36px 0;
+  color: var(--ink-faint);
+  font-size: 13.5px;
+}
