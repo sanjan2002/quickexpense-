@@ -3,6 +3,8 @@
 A personal expense tracker with automatic receipt scanning. Add expenses manually or by uploading a photo of a receipt — merchant, date, and total are extracted automatically. View all expenses with a live category breakdown, and get a daily spending summary by email.
 
 **Live app:** https://quickexpense-eh2ckyuff-sanjana-projects1.vercel.app
+or 
+https://quickexpense-two.vercel.app/
 **Backend API:** https://quickexpense-api.onrender.com
 
 ## Features
